@@ -1,3 +1,4 @@
+import React from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
 import Footer from './components/Footer';
@@ -5,15 +6,35 @@ import PopupWithForm from './components/PopupWithForm';
 import ImagePopup from './components/ImagePopup';
 
 function App() {
+  const [statePopupAvatar, setStatePopupAvatar] = React.useState(false)
+  const [statePopupProfile, setStatePopupProfile] = React.useState(false)
+  const [statePopupAddPlace, setStatePopupAddPlace] = React.useState(false)
+  const [statePopupDelete, setStatePopupDelete] = React.useState(false)
+  const [statePopupImage, setStatePopupImage] = React.useState(false)
+
+  const closeAllPopups = () => {
+    setStatePopupAvatar(false);
+    setStatePopupProfile(false)
+    setStatePopupAddPlace(false)
+    setStatePopupDelete(false)
+    setStatePopupImage(false)
+  }
+
   return (
     <div className="page">
     <div className="page__container">
     <Header />
-    <Main />
+    <Main 
+      onEditAvatar={() => { setStatePopupAvatar(true) }}
+      onEditProfile={() => { setStatePopupProfile(true) }}
+      onAddPlace={() => { setStatePopupAddPlace(true) }}
+    />
     <Footer />
     <PopupWithForm 
       name="avatar"
       title="Обновить аватар"
+      isOpen={statePopupAvatar}
+      onClose={closeAllPopups}
     >
       <>
         <div className="popup__input-wrapper">
@@ -35,6 +56,8 @@ function App() {
     <PopupWithForm 
       name="profile"
       title="Редактировать профиль"
+      isOpen={statePopupProfile}
+      onClose={closeAllPopups}
     >
       <>
         <div className="popup__input-wrapper">
@@ -72,6 +95,8 @@ function App() {
     <PopupWithForm 
       name="add-place"
       title="Добавить место"
+      isOpen={statePopupAddPlace}
+      onClose={closeAllPopups}
     >
       <>
         <div className="popup__input-wrapper">
@@ -107,14 +132,18 @@ function App() {
     <PopupWithForm 
       name="delete"
       title="Вы уверены?"
+      isOpen={statePopupDelete}
+      onClose={closeAllPopups}
     >
       <>
-        <h2 className="popup__title">Вы уверены?</h2>
         <button className="popup__save-button" type="submit" >Да</button>
       </> 
     </PopupWithForm>
 
-    <ImagePopup />
+    <ImagePopup 
+      isOpen={statePopupImage}
+      onClose={closeAllPopups}
+    />
 
   <template id="card-template">
     <li className="card">

@@ -1,9 +1,9 @@
-function Main() {
+function Main(props) {
   return (
     <main>
     <section className="profile section page__profile">
       <div className="profile__info">
-        <div className="profile__avatar-edit" onClick={handleEditAvatarClick}>
+        <div className="profile__avatar-edit" onClick={props.onEditAvatar}>
           <img 
             className="profile__avatar" 
             src="№" 
@@ -18,7 +18,7 @@ function Main() {
               className="profile__edit" 
               type="button" 
               aria-label="Редактирование профиля"
-              onClick={handleEditProfileClick}
+              onClick={props.onEditProfile}
             >
             </button>
           </div>
@@ -28,7 +28,7 @@ function Main() {
       <button 
         className="profile__add-button" 
         type="button" 
-        onClick={handleAddPlaceClick}
+        onClick={props.onAddPlace}
       >
       </button>
     </section>
@@ -38,18 +38,6 @@ function Main() {
     </section>
     </main>
   )
-}
-
-function handleEditAvatarClick() {
-  document.querySelector('.popup_type_avatar').classList.add('popup_opened')
-}
-
-function handleEditProfileClick() {
-  document.querySelector('.popup_type_profile').classList.add('popup_opened')
-}
-
-function handleAddPlaceClick() {
-  document.querySelector('.popup_type_add-place').classList.add('popup_opened')
 }
 
 export default Main
