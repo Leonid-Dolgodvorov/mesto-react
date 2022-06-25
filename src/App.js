@@ -4,7 +4,6 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import PopupWithForm from './components/PopupWithForm';
 import ImagePopup from './components/ImagePopup';
-import api from './utils/Api'
 
 function App() {
   const [statePopupAvatar, setStatePopupAvatar] = React.useState(false)
@@ -21,22 +20,6 @@ function App() {
     setStatePopupImage(false)
   }
 
-  const [userName, setuserName] = React.useState()
-  const [userDescription, setuserDescription] = React.useState()
-  const [userAvatar, setuserAvatar] = React.useState()
-
-  React.useEffect(() => {
-    api.getUserInfo()
-      .then ((userInfo) => {
-        setuserName(userInfo.name);
-        setuserDescription(userInfo.about);
-        setuserAvatar(userInfo.avatar);
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  })
-
   return (
     <div className="page">
     <div className="page__container">
@@ -45,9 +28,9 @@ function App() {
       onEditAvatar={() => { setStatePopupAvatar(true) }}
       onEditProfile={() => { setStatePopupProfile(true) }}
       onAddPlace={() => { setStatePopupAddPlace(true) }}
-      name={userName}
+/*       name={userName}
       about={userDescription}
-      link={userAvatar}
+      link={userAvatar} */
     />
     <Footer />
     <PopupWithForm 
@@ -164,21 +147,6 @@ function App() {
       isOpen={statePopupImage}
       onClose={closeAllPopups}
     />
-
-  <template id="card-template">
-    <li className="card">
-        <button className="card__delete-button" type="button"></button>
-        <img className="card__pic" alt="" />
-        <div className="card__text">
-            <h2 className="card__name"></h2>
-            <div className="card__likes-wrapper">
-              <button className="card__like-button" type="button"></button>
-              <p className="card__likes-quantity">0</p>
-            </div>
-        </div>        
-    </li>
-  </template>
-
   </div>
   </div>
   );
