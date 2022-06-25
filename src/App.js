@@ -11,14 +11,19 @@ function App() {
   const [statePopupAddPlace, setStatePopupAddPlace] = React.useState(false)
   // const [statePopupDelete, setStatePopupDelete] = React.useState(false)
   const [statePopupImage, setStatePopupImage] = React.useState(false)
-  const [selectedCard, setSelectedCard] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState({})
+
+  const handleCardClick = (card) => {
+    setSelectedCard(card)
+    setStatePopupImage(true)
+  }
 
   const closeAllPopups = () => {
     setStatePopupAvatar(false);
     setStatePopupProfile(false)
     setStatePopupAddPlace(false)
-    // setStatePopupDelete(false)
     setStatePopupImage(false)
+    // setStatePopupDelete(false)
   }
 
   return (
@@ -29,6 +34,7 @@ function App() {
       onEditAvatar={() => { setStatePopupAvatar(true) }}
       onEditProfile={() => { setStatePopupProfile(true) }}
       onAddPlace={() => { setStatePopupAddPlace(true) }}
+      onCardClick={(card) => { handleCardClick(card) }}
     />
     <Footer />
     <PopupWithForm 
@@ -144,6 +150,7 @@ function App() {
     <ImagePopup 
       isOpen={statePopupImage}
       onClose={closeAllPopups}
+      card={selectedCard}
     />
   </div>
   </div>

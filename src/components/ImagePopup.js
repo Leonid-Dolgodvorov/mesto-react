@@ -7,8 +7,12 @@ function ImagePopup(props) {
       ${props.isOpen ? 'popup_opened' : ''} 
     `}>
       <div className="popup__image-on-screen">
-        <img className="popup__image" alt="" />
-        <span className="popup__image-text"></span>
+        <img 
+          className="popup__image" 
+          alt={props.card.name} 
+          src={props.card.link} 
+        />
+        <span className="popup__image-text">Картинка {props.card.name}</span>
         <button 
           className="popup__close-button"
           onClick={props.onClose}

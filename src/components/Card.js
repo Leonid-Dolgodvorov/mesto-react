@@ -1,8 +1,17 @@
 function Card(props) {
+
+  function handleClick() {
+    props.onCardClick(props.card);
+  }
+
   return (
     <li className="card">
       <button className="card__delete-button" type="button"></button>
-      <img className="card__pic" alt={`картинка ${props.card.name}`} src={props.card.link} />
+      <img
+        onClick={handleClick()}
+        className="card__pic" 
+        alt={`картинка ${props.card.name}`} 
+        src={props.card.link} />
       <div className="card__text">
         <h2 className="card__name">{props.card.name}</h2>
         <div className="card__likes-wrapper">
