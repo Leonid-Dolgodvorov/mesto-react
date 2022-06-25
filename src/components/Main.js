@@ -4,13 +4,28 @@ import pencilImage from '../images/pencil.png';
 
 function Main(props) {
 
-  const [userName, setuserName] = React.useState('')
-  const [userDescription, setuserDescription] = React.useState('')
-  const [userAvatar, setuserAvatar] = React.useState('')
+  const [userName, setUserName] = React.useState('')
+  const [userDescription, setUserDescription] = React.useState('')
+  const [userAvatar, setUserAvatar] = React.useState('')
   const [cards, setCards] = React.useState()
 
-
   React.useEffect(() => {
+    Promise.all([api.getUserInfo(), api.getInitialCards()])
+      .then (([userInfo, cardList]) => {
+        setUserName(userInfo.name);
+        setUserDescription(userInfo.about);
+        setUserAvatar(userInfo.avatar);
+        setCards(cardList);
+        console.log(cardList)
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [])
+
+
+
+/*   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
       .then (([userInfo, cardList]) => {
         setuserName(userInfo.name);
@@ -23,7 +38,7 @@ function Main(props) {
         console.log(err)
       })
   }, [])
-
+ */
 /*   React.useEffect(() => {
     api.getUserInfo()
       .then ((userInfo) => {
@@ -75,12 +90,12 @@ function Main(props) {
           return (
             <li className="card" id={card._id}>
               <button className="card__delete-button" type="button"></button>
-              <img className="card__pic" alt='' />
+              <img className="card__pic" alt={card._link} />
               <div className="card__text">
-                <h2 className="card__name"></h2>
+                <h2 className="card__name">{card._name}</h2>
                 <div className="card__likes-wrapper">
                   <button className="card__like-button" type="button"></button>
-                  <p className="card__likes-quantity"></p>
+                  <p className="card__likes-quantity">{card._likes}</p>
                 </div>
               </div>        
             </li>
