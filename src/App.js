@@ -4,6 +4,7 @@ import Main from './components/Main';
 import Footer from './components/Footer';
 import PopupWithForm from './components/PopupWithForm';
 import ImagePopup from './components/ImagePopup';
+import api from './utils/Api'
 
 function App() {
   const [statePopupAvatar, setStatePopupAvatar] = React.useState(false)
@@ -20,6 +21,22 @@ function App() {
     setStatePopupImage(false)
   }
 
+  const [userName, setuserName] = React.useState()
+  const [userDescription, setuserDescription] = React.useState()
+  const [userAvatar, setuserAvatar] = React.useState()
+
+  React.useEffect(() => {
+    api.getUserInfo()
+      .then ((userInfo) => {
+        setuserName(userInfo.name);
+        setuserDescription(userInfo.about);
+        setuserAvatar(userInfo.avatar);
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  })
+
   return (
     <div className="page">
     <div className="page__container">
@@ -28,6 +45,9 @@ function App() {
       onEditAvatar={() => { setStatePopupAvatar(true) }}
       onEditProfile={() => { setStatePopupProfile(true) }}
       onAddPlace={() => { setStatePopupAddPlace(true) }}
+      name={userName}
+      about={userDescription}
+      link={userAvatar}
     />
     <Footer />
     <PopupWithForm 

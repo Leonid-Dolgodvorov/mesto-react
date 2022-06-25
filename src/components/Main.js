@@ -6,14 +6,14 @@ function Main(props) {
         <div className="profile__avatar-edit" onClick={props.onEditAvatar}>
           <img 
             className="profile__avatar" 
-            src="№" 
+            src={props.link} 
             alt="Аватар профиля" 
           />
           <div className="profile__avatar-overlay"></div>
         </div>
         <div className="profile__text">
           <div className="profile__name-edit">
-            <h1 className="profile__name">Жак Ив Кусто</h1>
+            <h1 className="profile__name">{props.name}</h1>
             <button 
               className="profile__edit" 
               type="button" 
@@ -22,7 +22,7 @@ function Main(props) {
             >
             </button>
           </div>
-          <p className="profile__job">Исследователь океана</p>
+          <p className="profile__job">{props.about}</p>
         </div>
       </div>
       <button 
