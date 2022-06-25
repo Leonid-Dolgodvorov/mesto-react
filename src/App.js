@@ -9,14 +9,15 @@ function App() {
   const [statePopupAvatar, setStatePopupAvatar] = React.useState(false)
   const [statePopupProfile, setStatePopupProfile] = React.useState(false)
   const [statePopupAddPlace, setStatePopupAddPlace] = React.useState(false)
-  const [statePopupDelete, setStatePopupDelete] = React.useState(false)
+  // const [statePopupDelete, setStatePopupDelete] = React.useState(false)
   const [statePopupImage, setStatePopupImage] = React.useState(false)
+  const [selectedCard, setSelectedCard] = React.useState(false)
 
   const closeAllPopups = () => {
     setStatePopupAvatar(false);
     setStatePopupProfile(false)
     setStatePopupAddPlace(false)
-    setStatePopupDelete(false)
+    // setStatePopupDelete(false)
     setStatePopupImage(false)
   }
 
@@ -28,9 +29,6 @@ function App() {
       onEditAvatar={() => { setStatePopupAvatar(true) }}
       onEditProfile={() => { setStatePopupProfile(true) }}
       onAddPlace={() => { setStatePopupAddPlace(true) }}
-/*       name={userName}
-      about={userDescription}
-      link={userAvatar} */
     />
     <Footer />
     <PopupWithForm 
@@ -135,7 +133,7 @@ function App() {
     <PopupWithForm 
       name="delete"
       title="Вы уверены?"
-      isOpen={statePopupDelete}
+      // isOpen={statePopupDelete}
       onClose={closeAllPopups}
     >
       <>

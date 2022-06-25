@@ -1,13 +1,14 @@
-import api from "../utils/Api";
-import React from 'react';
-import pencilImage from '../images/pencil.png';
+import React from 'react'
+import api from "../utils/Api"
+import pencilImage from '../images/pencil.png'
+import Card from './Card'
 
 function Main(props) {
 
   const [userName, setUserName] = React.useState('')
   const [userDescription, setUserDescription] = React.useState('')
   const [userAvatar, setUserAvatar] = React.useState('')
-  const [cards, setCards] = React.useState()
+  const [cards, setCards] = React.useState([])
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -16,40 +17,11 @@ function Main(props) {
         setUserDescription(userInfo.about);
         setUserAvatar(userInfo.avatar);
         setCards(cardList);
-        console.log(cardList)
       })
       .catch((err) => {
         console.log(err)
       })
   }, [])
-
-
-
-/*   React.useEffect(() => {
-    Promise.all([api.getUserInfo(), api.getInitialCards()])
-      .then (([userInfo, cardList]) => {
-        setuserName(userInfo.name);
-        setuserDescription(userInfo.about);
-        setuserAvatar(userInfo.avatar);
-        setCards(cardList);
-        console.log(cardList)
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, [])
- */
-/*   React.useEffect(() => {
-    api.getUserInfo()
-      .then ((userInfo) => {
-        setuserName(userInfo.name);
-        setuserDescription(userInfo.about);
-        setuserAvatar(userInfo.avatar);
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-  }, []) */
 
   return (
     <main>
@@ -86,21 +58,10 @@ function Main(props) {
     </section>
     <section className="elements section page__elements">
       <ul className="elements__list">
-        {/* cards.map((card) => {
-          return (
-            <li className="card" id={card._id}>
-              <button className="card__delete-button" type="button"></button>
-              <img className="card__pic" alt={card._link} />
-              <div className="card__text">
-                <h2 className="card__name">{card._name}</h2>
-                <div className="card__likes-wrapper">
-                  <button className="card__like-button" type="button"></button>
-                  <p className="card__likes-quantity">{card._likes}</p>
-                </div>
-              </div>        
-            </li>
-          )
-        }) */}
+        {cards.map((card) => {
+          return ( <Card card={card} key={card._id} />
+          )          
+        })}
       </ul>
     </section>
     </main>
