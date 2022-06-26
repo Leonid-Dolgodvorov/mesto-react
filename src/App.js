@@ -34,7 +34,7 @@ function App() {
       onEditAvatar={() => { setStatePopupAvatar(true) }}
       onEditProfile={() => { setStatePopupProfile(true) }}
       onAddPlace={() => { setStatePopupAddPlace(true) }}
-      onCardClick={(card) => { handleCardClick(card) }}
+      onCardClick={handleCardClick}
     />
     <Footer />
     <PopupWithForm 
