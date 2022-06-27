@@ -19,7 +19,7 @@ function App() {
   }
 
   const closeAllPopups = () => {
-    setStatePopupAvatar(false);
+    setStatePopupAvatar(false)
     setStatePopupProfile(false)
     setStatePopupAddPlace(false)
     setStatePopupImage(false)

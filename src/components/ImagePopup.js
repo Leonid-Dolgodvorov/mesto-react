@@ -5,7 +5,7 @@ function ImagePopup(props) {
       popup_type_image 
       popup_theme_dark 
       ${props.isOpen ? 'popup_opened' : ''} 
-    `}>
+      `}>
       <div className="popup__image-on-screen">
         <img 
           className="popup__image" 
