@@ -43,8 +43,7 @@ function Main(props) {
               type="button" 
               aria-label="Редактирование профиля"
               onClick={props.onEditProfile}
-            >
-            </button>
+            />
           </div>
           <p className="profile__job">{userDescription}</p>
         </div>
@@ -53,8 +52,7 @@ function Main(props) {
         className="profile__add-button" 
         type="button" 
         onClick={props.onAddPlace}
-      >
-      </button>
+      />
     </section>
     <section className="elements section page__elements">
       <ul className="elements__list">

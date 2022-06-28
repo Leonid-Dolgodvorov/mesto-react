@@ -15,11 +15,10 @@ function PopupWithForm(props) {
         className="popup__close-button"
         onClick={props.onClose}
         type="button"
-      >        
-      </button>
+      />        
     </div>
   </div>
   )
 }
 
-export default PopupwithForm
+export default PopupWithForm

@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from './components/Header';
-import Main from './components/Main';
-import Footer from './components/Footer';
-import PopupWithForm from './components/PopupWithForm';
-import ImagePopup from './components/ImagePopup';
+import Header from './Header';
+import Main from './Main';
+import Footer from './Footer';
+import PopupWithForm from './PopupWithForm';
+import ImagePopup from './ImagePopup';
 
 function App() {
   const [statePopupAvatar, setStatePopupAvatar] = React.useState(false)
@@ -18,11 +18,24 @@ function App() {
     setStatePopupImage(true)
   }
 
+  const handleEditAvatar = () => {
+    setStatePopupAvatar(true)
+  }
+
+  const handleEditProfile = () => {
+    setStatePopupProfile(true)
+  }
+
+  const handleAddPlace = () => {
+    setStatePopupAddPlace(true)
+  }
+
   const closeAllPopups = () => {
     setStatePopupAvatar(false)
     setStatePopupProfile(false)
     setStatePopupAddPlace(false)
     setStatePopupImage(false)
+    setSelectedCard({})
     // setStatePopupDelete(false)
   }
 
@@ -31,9 +44,9 @@ function App() {
     <div className="page__container">
     <Header />
     <Main 
-      onEditAvatar={() => { setStatePopupAvatar(true) }}
-      onEditProfile={() => { setStatePopupProfile(true) }}
-      onAddPlace={() => { setStatePopupAddPlace(true) }}
+      onEditAvatar={handleEditAvatar}
+      onEditProfile={handleEditProfile}
+      onAddPlace={handleAddPlace}
       onCardClick={handleCardClick}
     />
     <Footer />

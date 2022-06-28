@@ -17,8 +17,7 @@ function ImagePopup(props) {
           onClick={props.onClose}
           className="popup__close-button"
           type="button"
-        >          
-        </button>
+        />          
       </div>    
     </div>
   )
