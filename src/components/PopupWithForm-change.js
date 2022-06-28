@@ -1,4 +1,4 @@
-function PopupwithForm(props) {
+function PopupWithForm(props) {
   return (
     <div className={`
       popup 
