@@ -22,12 +22,7 @@ class Api {
     return fetch(`${this._url}users/me`, {
       headers: this._headers
     })
-      .then(res => {
-        if (res.ok) {
-          return res.json();
-        }
-        return Promise.reject(`Ошибка: ${res.status}`);
-      })
+      .then(res => this.returnResJson(res))
   }
 
   editUserInfo( {name, about }) {
@@ -87,6 +82,14 @@ class Api {
       headers: this._headers
     })
       .then(res => this.returnResJson(res))
+  }
+
+  changeLikeCardStatus(cardId, isLiked) {
+    return fetch(`${this._url}cards/likes/${cardId}`, {
+      method: `${isLiked ? 'PUT' : 'DELETE'}`,
+      headers: this._headers
+    })
+    .then(res => this.returnResJson(res))
   }
 }
 
