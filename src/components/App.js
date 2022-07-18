@@ -6,6 +6,7 @@ import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
+import EditProfilePopup from './EditProfilePopup';
 
 function App() {
   const [statePopupAvatar, setStatePopupAvatar] = React.useState(false)
@@ -43,6 +44,15 @@ function App() {
 
   const handleAddPlace = () => {
     setStatePopupAddPlace(true)
+  }
+
+  const handleUpdateUserInfo = (data) => {
+    api.editUserInfo(data)
+      .then((user) => {
+        setCurrentUser(user);
+        closeAllPopups();
+      })
+      .catch((err) => console.log(err));
   }
 
   const closeAllPopups = () => {
@@ -91,44 +101,12 @@ function App() {
       </>
     </PopupWithForm>
 
-    <PopupWithForm 
-      name="profile"
-      title="Редактировать профиль"
+    <EditProfilePopup
       isOpen={statePopupProfile}
       onClose={closeAllPopups}
-    >
-      <>
-        <div className="popup__input-wrapper">
-          <input 
-            id="name" 
-            className="popup__input popup__input_type_name" 
-            type="text" 
-            name="name" 
-            placeholder="Введите ФИО" 
-            autoComplete="off" 
-            minLength="2" 
-            maxLength="40" 
-            required
-          />
-           <span className="popup__error popup__error_type_name"></span>
-        </div>
-        <div className="popup__input-wrapper">
-          <input 
-            id="job"
-            className="popup__input popup__input_type_job"
-            type="text"
-            name="job"
-            placeholder="Введите описание"
-            autoComplete="off"
-            minLength="2"
-            maxLength="200"
-            required
-          />
-          <span className="popup__error popup__error_type_job"></span>
-        </div>
-        <button className="popup__save-button" type="submit">Сохранить</button>
-      </>
-    </PopupWithForm >
+      onUpdateProfileInfo={handleUpdateUserInfo}
+    >      
+    </EditProfilePopup>
 
     <PopupWithForm 
       name="add-place"
