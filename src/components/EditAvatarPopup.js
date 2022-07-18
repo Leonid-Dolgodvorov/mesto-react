@@ -19,6 +19,7 @@ function EditAvatarPopup(props) {
       title="Обновить аватар"
       isOpen={props.isOpen}
       onClose={props.onClose}
+      onSubmit={handleSubmit}
     >
       <div className="popup__input-wrapper">
         <input 
@@ -36,7 +37,6 @@ function EditAvatarPopup(props) {
       <button 
         className="popup__save-button" 
         type="submit"
-        onClick={handleSubmit}
       >
         {props.isLoading ? 'Сохранение...' : 'Сохранить'}
       </button>

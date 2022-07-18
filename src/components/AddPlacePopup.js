@@ -6,10 +6,8 @@ function AddPlacePopup(props) {
   const [placeInfo, setPlaceInfo] = React.useState({});
 
   React.useEffect(() => {
-    setPlaceInfo({ place: "", link: "" });
+    if (props.isOpen) {setPlaceInfo({ place: "", link: "" })}
   }, [props.isOpen]);
-
-  
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -33,6 +31,7 @@ function AddPlacePopup(props) {
       title="Новое место"
       isOpen={props.isOpen}
       onClose={props.onClose}
+      onSubmit={handleSubmit}
     >
       <div className="popup__input-wrapper">
           <input 
@@ -67,7 +66,6 @@ function AddPlacePopup(props) {
         <button 
           className="popup__save-button" 
           type="submit"
-          onClick={handleSubmit}
         >
           {props.isLoading ? 'Сохранение...' : 'Создать'}
         </button>

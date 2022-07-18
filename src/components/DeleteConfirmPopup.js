@@ -12,7 +12,7 @@ function ConfirmDeletePopup(props) {
       title="Вы уверены?"
       isOpen={props.isOpen}
       onClose={props.onClose}
-      onSubmit={handleSubmit}
+      onSubmit={props.handleSubmit}
     >
       <button 
         className="popup__save-button" 
