@@ -72,7 +72,7 @@ function EditProfilePopup(props) {
           className="popup__save-button" 
           type="submit"
         >
-        Сохранить
+          {props.isLoading ? 'Сохранение...' : 'Сохранить'}
         </button>
       </>
     </PopupWithForm >

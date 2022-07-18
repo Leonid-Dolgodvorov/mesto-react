@@ -69,7 +69,7 @@ function AddPlacePopup(props) {
           type="submit"
           onClick={handleSubmit}
         >
-        Создать
+          {props.isLoading ? 'Сохранение...' : 'Создать'}
         </button>
     </PopupWithForm>
   );

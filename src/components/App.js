@@ -2,13 +2,13 @@ import React from 'react';
 import Header from './Header';
 import Main from './Main';
 import Footer from './Footer';
-import PopupWithForm from './PopupWithForm';
 import ImagePopup from './ImagePopup';
 import CurrentUserContext from "../contexts/CurrentUserContext";
 import api from "../utils/Api";
 import EditProfilePopup from './EditProfilePopup';
 import AddPlacePopup from './AddPlacePopup';
 import EditAvatarPopup from './EditAvatarPopup';
+// import DeleteConfirmPopup from './DeleteConfirmPopup'
 
 function App() {
   const [statePopupAvatar, setStatePopupAvatar] = React.useState(false)
@@ -19,6 +19,7 @@ function App() {
   const [selectedCard, setSelectedCard] = React.useState({})
   const [currentUser, setCurrentUser] = React.useState({});
   const [cards, setCards] = React.useState([])
+  const [loadingStatus, setLoadingStatus] = React.useState(false)
 
   React.useEffect(() => {
     Promise.all([api.getUserInfo(), api.getInitialCards()])
@@ -49,19 +50,23 @@ function App() {
   }
 
   const handleUpdateUserInfo = (data) => {
+    setLoadingStatus(true)
     api.editUserInfo(data)
       .then((user) => {
         setCurrentUser(user);
         closeAllPopups();
+        setLoadingStatus(false)
       })
       .catch((err) => console.log(err));
   }
 
   const submitEditAvatar = (data) => {
+    setLoadingStatus(true)
     api.editAvatar(data)
       .then((data) => {
         setCurrentUser(data);
         closeAllPopups();
+        setLoadingStatus(false)
       })
       .catch((err) => console.log(err));
   };
@@ -93,10 +98,12 @@ function App() {
   }
 
   const handleAddPlaceSubmit = (data) => {
+    setLoadingStatus(true)
     api.addCard(data)
       .then((newCard) => {
         setCards([newCard, ...cards]);
         closeAllPopups();
+        setLoadingStatus(false)
       })
       .catch((err) => console.log(err));
   }
@@ -121,6 +128,7 @@ function App() {
           isOpen={statePopupAvatar}
           onClose={closeAllPopups}
           onEditAvatar={submitEditAvatar}
+          loadingStatus={loadingStatus}
         >      
         </EditAvatarPopup>
 
@@ -128,6 +136,7 @@ function App() {
           isOpen={statePopupProfile}
           onClose={closeAllPopups}
           onUpdateProfileInfo={handleUpdateUserInfo}
+          loadingStatus={loadingStatus}
         >      
         </EditProfilePopup>
 
@@ -135,19 +144,17 @@ function App() {
           isOpen={statePopupAddPlace}
           onClose={closeAllPopups}
           onAddPlace={handleAddPlaceSubmit}
+          loadingStatus={loadingStatus}
         >
         </AddPlacePopup>
 
-        <PopupWithForm 
-          name="delete"
-          title="Вы уверены?"
-          // isOpen={statePopupDelete}
+{/*         <DeleteConfirmPopup
+          isOpen={statePopupDelete}
           onClose={closeAllPopups}
+          loadingStatus={loadingStatus}
+          confirmDeleteClick={handleCardDelete}
         >
-          <>
-            <button className="popup__save-button" type="submit" >Да</button>
-          </> 
-        </PopupWithForm>
+        </DeleteConfirmPopup> */}
 
         <ImagePopup 
           isOpen={statePopupImage}

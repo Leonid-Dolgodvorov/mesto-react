@@ -38,7 +38,7 @@ function EditAvatarPopup(props) {
         type="submit"
         onClick={handleSubmit}
       >
-        Сохранить
+        {props.isLoading ? 'Сохранение...' : 'Сохранить'}
       </button>
     </PopupWithForm>
   );
